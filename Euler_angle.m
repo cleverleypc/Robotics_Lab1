@@ -1,3 +1,6 @@
+# version 2.0 
+# by A.C.Jr
+# Rotation Matrix To Euler Angles ZYZ
 function [] = Euler_angle( rotationMatrix ) %Input a 3*3 Rotation Matrix
 %Given a rotation matrix, determine Euler angles of the final orientation
 %Euler angles ZYZ
@@ -56,8 +59,8 @@ xlabel('x-axis'); ylabel('y-axis'); zlabel('z-axis');
 axis( [-1,1,-1,1,-1,1] );
 title({'Determination of Euler Angles ZYZ by a given Rotation Matrix' ; 'Color of the Vector~Axis of the Orientation' ; 
     'Red~X-axis   Green~Y-axis   Blue~Z-axis'});
-fprintf('The rotation angle around z1-axis is %.2f ¡ã\n', rad2deg(angle_z1_axis) );
-fprintf('The rotation angle around y1-axis is %.2f ¡ã\n', rad2deg(angle_y1_axis) );
-fprintf('The rotation angle around z2-axis is %.2f ¡ã\n', rad2deg(angle_z2_axis) );
+fprintf('The rotation angle around z1-axis is %.2f Â¡Ã£\n', rad2deg(angle_z1_axis) );
+fprintf('The rotation angle around y1-axis is %.2f Â¡Ã£\n', rad2deg(angle_y1_axis) );
+fprintf('The rotation angle around z2-axis is %.2f Â¡Ã£\n', rad2deg(angle_z2_axis) );
 end
 
