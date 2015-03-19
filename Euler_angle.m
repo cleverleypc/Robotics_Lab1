@@ -7,35 +7,43 @@ r11=rotationMatrix(1,1);r12=rotationMatrix(1,2);r13=rotationMatrix(1,3);
 r21=rotationMatrix(2,1);r22=rotationMatrix(2,2);r23=rotationMatrix(2,3);
 r31=rotationMatrix(3,1);r32=rotationMatrix(3,2);r33=rotationMatrix(3,3);
 
-%Determine the rotation angle around z-axis
-if ( r13 ~= 0 ) && ( r23 ~= 0)
-    angle_z1_axis = atan2( r23,r13 );
-elseif  ( r23 == 0 )
-    angle_z1_axis = 0;
-elseif  ( r23 > 0 )
-    angle_z1_axis = pi/2;
-else  
-    angle_z1_axis = -pi/2;    
-end
-
-%Determine the rotation angle around y-axis
-if  sqrt( r13^2+r23^2 ) == 0 
-    angle_y1_axis = 0 ;
-elseif ( sqrt( r13^2+r23^2 ) ~= 0 ) && ( r33 == 0 )
+%Determine the rotation angle around y1-axis
+if  r33 ~= 0 
+    angle_y1_axis =  atan2( sqrt(r13^2+r23^2) , r33 );
+elseif  sqrt( r13^2+r23^2 ) ~= 0 
    angle_y1_axis =  pi/2;
-elseif ( sqrt( r13^2+r23^2 ) ~= 0 ) && ( r33 ~= 0 )
-    angle_y1_axis = atan2( sqrt(r13^2+r23^2) , r33 );
+elseif  sqrt( r13^2+r23^2 ) == 0 
+    angle_y1_axis = 0;
 end
 
-%Determine the rotation angle around z-axis
-if  r31 ~= 0 
-    angle_z2_axis = atan2( r32,-r31 );
-elseif ( r32>0 )
-    angle_z2_axis = pi/2;  
-elseif ( r32<0 )
-    angle_z2_axis = -pi/2;
+%Determine the rotation angle around z1-axis
+if  r13 ~= 0 
+    if r23 ~= 0
+        angle_z1_axis = atan2( r23,r13 );
+    else
+        angle_z1_axis = asin( r23/sin(angle_y1_axis) );
+    end
 else 
-    angle_z2_axis = 0;
+    if sin(angle_y1_axis) == 0
+        angle_z1_axis = 0;
+    else
+        angle_z1_axis = asin( r23/sin(angle_y1_axis) );  
+    end
+end
+
+%Determine the rotation angle around z2-axis
+if  r31 ~= 0 
+    if r32 ~= 0
+        angle_z2_axis = atan2( r32,-r31 );
+    else
+        angle_z2_axis = asin( r32/sin(angle_y1_axis) );
+    end
+else 
+    if sin(angle_y1_axis) == 0
+        angle_z2_axis = 0;
+    else
+        angle_z2_axis = asin( r32/sin(angle_y1_axis) );  
+    end
 end
 
 %Draw the figure
